@@ -41,9 +41,9 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2
         env:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
-          remote-host: ${{ secrets.HOST_DNS }}
-          remote-user: ${{ secrets.USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
           local-path: '.' 
           remote-path: '/var/www/html/'
           args: '-o StrictHostKeyChecking=no'
