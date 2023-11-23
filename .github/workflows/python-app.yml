@@ -44,4 +44,4 @@ jobs:
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
         REMOTE_USER: ${{ secrets.USERNAME }}
         run: |
-            sudo rsync -avz --delete ./* /var/www/html/
+           #sudo rsync -avz --delete ./* /var/www/html/
