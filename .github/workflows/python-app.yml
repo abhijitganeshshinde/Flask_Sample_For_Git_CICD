@@ -45,5 +45,3 @@ jobs:
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
         REMOTE_USER: ${{ secrets.USERNAME }}
         run: | 
-	echo hello
-	     
