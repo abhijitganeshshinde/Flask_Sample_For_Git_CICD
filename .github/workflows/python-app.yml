@@ -36,4 +36,13 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest
+          pytest
+
+    - uses: easingthemes/ssh-deploy@main
+    - name: Deploy to Server
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        REMOTE_HOST: ${{ secrets.HOST_DNS }}
+        REMOTE_USER: ${{ secrets.USERNAME }}
+      run: |
+          sudo rsync -avz --delete ./* /var/www/html/
