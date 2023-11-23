@@ -34,6 +34,7 @@ jobs:
     - name: Test with pytest
       run: |
           pytest
+
   deploy:
     name: Deploy to EC2 on master branch push
     runs-on: ubuntu-latest
@@ -42,13 +43,12 @@ jobs:
       - name: Checkout the files
         uses: actions/checkout@v2
 
-      - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          #TARGET: ${{ secrets.TARGET_DIR }}
-          #COMMAND: 'sudo rsync -av --exclude="..." . $TARGET'
-          run: |
-                'cd /var/www/html/ && sudo git clone https://github.com/abhijitganeshshinde/CI-CD-PIpeline-For-WebApp.git'
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v2
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+          remote-host: ${{ secrets.HOST_DNS }}
+          remote-user: ${{ secrets.USERNAME }}
+          local-path: '.' 
+          remote-path: '/var/www/html/'
+          args: '-o StrictHostKeyChecking=no'
