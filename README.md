@@ -8,7 +8,6 @@ This repository uses GitHub Actions for automated deployment to an EC2 instance.
 ### 1. Fork or Clone Repository
 
     Clone or fork this repository to your local machine:
-
     ```bash
         git clone <repository_url>
         cd <repository_name>
