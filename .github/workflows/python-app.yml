@@ -1,13 +1,10 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Python application
 
 on:
   push:
-    branches: [ "main","staging" ]
+    branches: [ "main", "staging" ]
   pull_request:
-    branches: [ "main","staging" ]
+    branches: [ "main", "staging" ]
 
 permissions:
   contents: read
@@ -37,11 +34,12 @@ jobs:
     - name: Test with pytest
       run: |
           pytest
-          
     - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@main
+    - uses: easingthemes/ssh-deploy@main
       env:
         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
         REMOTE_USER: ${{ secrets.USERNAME }}
-        run: | 
+        run: |
+          ssh $REMOTE_USER@$REMOTE_HOST 'mkdir -p /var/www/html'
+          scp -r ./* $REMOTE_USER@$REMOTE_HOST:/var/www/html 
