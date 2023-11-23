@@ -44,6 +44,8 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          local-path: '.' 
-          remote-path: '/var/www/html/'
-          args: '-o StrictHostKeyChecking=no'
+          REMOTE_PORT: 22  # or specify your port
+          SOURCE: "."  # Local source directory to deploy
+          TARGET: "/var/www/html/"  # Remote target directory
+          ARGS: "-o StrictHostKeyChecking=no"
+          EXCLUDE: ""  # You can specify excludes if needed
