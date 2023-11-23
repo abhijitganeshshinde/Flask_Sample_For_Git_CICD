@@ -44,10 +44,9 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          #REMOTE_PORT: 22  # or specify your port
-          #SOURCE: "."  # Local source directory to deploy
-          #TARGET: "/var/www/html/"  # Remote target directory
+          REMOTE_PORT: 22
+          SOURCE: "."
+          TARGET: "/var/www/html/"
           #ARGS: "-o StrictHostKeyChecking=no"
           #EXCLUDE: ""  # You can specify excludes if needed
-          run: |
-            'cd /var/www/html/ && sudo git clone https://github.com/abhijitganeshshinde/Flask_Sample_For_Git_CICD.git'
+          
