@@ -37,12 +37,11 @@ jobs:
     - name: Test with pytest
       run: |
           pytest
-
-    - uses: easingthemes/ssh-deploy@main
     - name: Deploy to Server
+    - uses: easingthemes/ssh-deploy@main
       env:
         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
         REMOTE_HOST: ${{ secrets.HOST_DNS }}
         REMOTE_USER: ${{ secrets.USERNAME }}
-      run: |
-          sudo rsync -avz --delete ./* /var/www/html/
+        run: |
+            sudo rsync -avz --delete ./* /var/www/html/
